@@ -1,0 +1,22 @@
+.nav{
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav a{
+    background: rgba(255, 0, 0, 0.25);
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+}
+
+.nav a:hover{
+    background: rgba(255, 0, 0, 0.44);
+    transition: 0.4s;
+}

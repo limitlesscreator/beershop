@@ -1,24 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState} from "react";
+import {Main} from "./Components/Main";
 
 function App() {
+    const [beers,setBeers] = useState([])
+    const [bestBeer, setBestBeer] = useState('Godzila')
+
+    const fetchBeers = () => {
+        fetch('https://api.punkapi.com/v2/beers?page=1&per_page=8')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setBeers(data)
+            })
+    }
+
+    const priceOfBeer = (value) => {
+        let temp = String(Math.floor((value / 3) * 100)).slice(0,2)
+        return temp.padEnd(temp.length + 1,'9')
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        {/*<button onClick={() => fetchBeers()}>fetch</button>*/}
+      <Main priceOfBeer={priceOfBeer} beers={beers} fetchBeers={fetchBeers}/>
+    </>
   );
 }
 

@@ -1,0 +1,14 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 250px;
+    height: 350px;
+    background: rgba(17, 255, 0, 0.44);
+}
+
+.card img{
+    width: 80px;
+}

@@ -1,12 +1,21 @@
 import React from 'react';
 import s from './Nav.module.css'
-export const Nav = () => {
+import {Link} from 'react-router-dom'
+import {ReactComponent as Basket} from '../icons/basket.svg'
+
+export const Nav = (props) => {
     return (
         <div className={s.nav}>
-            <a href={'#'}>Главная</a>
-            <a href={'#'}>О магазине</a>
+            <Link to={'/'}>Главная</Link>
+            <Link to={'/about'}>О магазине</Link>
+            beerLogo
             <a href={'#'}>Вход</a>
-            <a href={'#'}>137 591 р.</a>
+            <a className={s.basket} href={'#'}>
+                <Basket className={s.basketIcon}/>
+
+                <div className={s.sumBasket}>{props.costBasket} ₽.</div>
+                <div className={s.countBasket}>{props.sizeBasket}</div>
+            </a>
         </div>
     );
 };

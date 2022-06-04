@@ -4,29 +4,68 @@ import React, {useState} from "react";
 import {Main} from "./Components/Main";
 
 function App() {
-    const [beers,setBeers] = useState([])
+    const [beers, setBeers] = useState([])
+    const [currentBeer, setCurrentBeer] = useState({})
+    const [reloadData, setReloadData] = useState(true)
+    const [sizeBasket, setSizeBasket] = useState(0)
+    const [costBasket, setConstBasket] = useState(0)
+
+    const [valueOfStuff, setValueOfStuff] = useState([])
+
+
     const [bestBeer, setBestBeer] = useState('Godzila')
 
+
+
     const fetchBeers = () => {
-        fetch('https://api.punkapi.com/v2/beers?page=1&per_page=8')
+        console.log('boom')
+        fetch('https://api.punkapi.com/v2/beers?page=1&per_page=12')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                ////////////////////////////////////////////////////////
+                if (valueOfStuff.length === 0){
+                    let tempOfId = []
+                    data.forEach(el => tempOfId.push({id: el.id, valueOfStuff: Number(el.name.length) * 2}))
+                    console.log(tempOfId)
+                    setValueOfStuff(tempOfId)
+                }
+                ///////////////////////////////////////////////////////
+
                 setBeers(data)
             })
     }
 
-    const priceOfBeer = (value) => {
-        let temp = String(Math.floor((value / 3) * 100)).slice(0,2)
-        return temp.padEnd(temp.length + 1,'9')
+    const beerDetails = (id) => {
+        fetch(`https://api.punkapi.com/v2/beers/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                setCurrentBeer(data[0])
+                console.log(data[0])
+            })
     }
 
-  return (
-    <>
-        {/*<button onClick={() => fetchBeers()}>fetch</button>*/}
-      <Main priceOfBeer={priceOfBeer} beers={beers} fetchBeers={fetchBeers}/>
-    </>
-  );
+    const priceOfBeer = (value) => {
+        let temp = String(Math.floor((value / 3) * 100)).slice(0, 2)
+        return temp.padEnd(temp.length + 1, '9')
+    }
+
+    return (
+        <>
+            <Main reloadData={reloadData}
+                  setReloadData={setReloadData}
+                  currentBeer={currentBeer}
+                  beerDetails={beerDetails}
+                  priceOfBeer={priceOfBeer}
+                  beers={beers}
+                  fetchBeers={fetchBeers}
+                  sizeBasket={sizeBasket}
+                  costBasket={costBasket}
+                  valueOfStuff={valueOfStuff}
+                  setValueOfStuff={setValueOfStuff}
+
+            />
+        </>
+    );
 }
 
 export default App;

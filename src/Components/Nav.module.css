@@ -1,10 +1,13 @@
 .nav{
+    width: 1060px;
     display: flex;
+    position: fixed;
+    top: 0;
     justify-content: space-around;
 }
 
 .nav a{
-    background: rgba(255, 0, 0, 0.25);
+    background: rgb(255, 0, 0);
     width: 100%;
     text-align: center;
     text-decoration: none;
@@ -20,3 +23,39 @@
     background: rgba(255, 0, 0, 0.44);
     transition: 0.4s;
 }
+
+.basketIcon{
+    width: 23px;
+    color: white;
+}
+
+.basket{
+    position: relative;
+
+}
+
+.countBasket{
+    position: absolute;
+    top: 2px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: #000;
+    text-align: center;
+    font-weight: 500;
+    font-size: 9px;
+    line-height: 16px;
+    background-color: #fff;
+    border: 2px solid red;
+    border-radius: 50%;
+}
+
+.sumBasket{
+    color: white;
+
+    padding-left: 20px;
+}
+

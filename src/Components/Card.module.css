@@ -1,14 +1,32 @@
 .card{
+    padding: 20px 0 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     width: 250px;
-    height: 350px;
+    height: 440px;
     background: rgba(17, 255, 0, 0.44);
 }
 
 .card img{
     width: 80px;
+}
+
+.priceBeer{
+    font-weight: bold;
+    text-align: center;
+}
+
+.busket{
+    margin-top: 10px;
+    width: 100px;
+    font-weight: bold;
+    text-transform: uppercase;
+    height: 30px;
+}
+
+.nameBeer{
+    text-align: center;
 }

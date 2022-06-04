@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {Card} from "./Card";
+import {Beer} from "./Beer";
 import s from './Cards.module.css'
 
-export const Cards = (props) => {
+export const ListBeers = (props) => {
     useEffect(() => {
         props.fetchBeers()
     },[])
@@ -11,7 +11,7 @@ export const Cards = (props) => {
         <div className={s.cards}>
             {props.beers.map((el,index) => {
                 return (
-                    <Card priceOfBeer={props.priceOfBeer} key={props.beers.id} beers={props.beers[index]}/>
+                    <Beer reloadData={props.reloadData} setReloadData={props.setReloadData} id={el.id} beerDetails={props.beerDetails} priceOfBeer={props.priceOfBeer} key={props.beers.id} beer={props.beers[index]}/>
                 )
             })}
         </div>

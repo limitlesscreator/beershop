@@ -4,6 +4,8 @@ import s from "./Card.module.css";
 
 export const Beerdetails = (props) => {
     const location = useLocation()
+    const tempId = location.pathname.split('-').reverse()[0]
+    const [addToBasket, setAddToBasket] = useState(0)
 
     useEffect(() => { // если пользователь вставит ссылку в браузере самостоятельно, то произойдёт запрос на сервер с нужными данными и всё отрисуется:)
         if (props.reloadData) { // если тру, то делаем запрос, а если false, то не будем дважды делать запрос по клику имени бутылки. Если клик был по имени, то значение переходит в false
@@ -12,7 +14,6 @@ export const Beerdetails = (props) => {
             props.beerDetails(temp)
         }
     }, [])
-    console.log(props.priceOfBeer(props.currentBeer.abv))
 
     return (
         <div>
@@ -25,13 +26,18 @@ export const Beerdetails = (props) => {
             {props.currentBeer.description}
             <br/>
             {console.log(props.valueOfStuff)}
-            Наличие:{props.valueOfStuff[location.pathname.split('-').reverse()[0]].valueOfStuff}
+            Наличие:{props.valueOfStuff[tempId]?.valueOfStuff}
             <br/>
-            <button
-                onClick={() => props.setValueOfStuff([...props.valueOfStuff, props.valueOfStuff[location.pathname.split('-').reverse()[0]].valueOfStuff -= 1])}>Добавить
-                в карзину
-            </button>
-            {/*{available ? <button className={s.busket}>в корзину</button> : <div>Нету в наличии</div>}*/}
+            {props.valueOfStuff[tempId]?.valueOfStuff >= 1 ?<> <button
+                onClick={() => {
+                    props.setValueOfStuff([...props.valueOfStuff, props.valueOfStuff[location.pathname.split('-').reverse()[0]].valueOfStuff -= addToBasket])
+                    props.setSizeBasket(addToBasket)
+                    props.setConstBasket((prev) => prev + (props.priceOfBeer(props.currentBeer.abv) * addToBasket))
+                }}
+                className={s.busket}>Добавить в корзину</button> <input value={addToBasket} type="number" min={1} max={props.valueOfStuff[tempId]?.valueOfStuff}
+                                                                        onChange={(e) => setAddToBasket(e.currentTarget.value)}
+
+            /> </> : <div>Нету в наличии</div>}
 
         </div>
     );

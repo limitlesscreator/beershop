@@ -24,8 +24,8 @@ function App() {
             .then(data => {
                 ////////////////////////////////////////////////////////
                 if (valueOfStuff.length === 0){
-                    let tempOfId = []
-                    data.forEach(el => tempOfId.push({id: el.id, valueOfStuff: Number(el.name.length) * 2}))
+                    let tempOfId = [] // создаётся массив с кол-вом наличия товара
+                    data.forEach(el => tempOfId.push({id: el.id, valueOfStuff: +el.name.length % 6 === 0 ? 0 : Number(el.name.length) * 2}))
                     console.log(tempOfId)
                     setValueOfStuff(tempOfId)
                 }
@@ -51,7 +51,10 @@ function App() {
 
     return (
         <>
-            <Main reloadData={reloadData}
+            <Main
+                setConstBasket={setConstBasket}
+                setSizeBasket={setSizeBasket}
+                reloadData={reloadData}
                   setReloadData={setReloadData}
                   currentBeer={currentBeer}
                   beerDetails={beerDetails}

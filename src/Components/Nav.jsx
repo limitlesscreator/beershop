@@ -9,7 +9,7 @@ export const Nav = (props) => {
             <Link to={'/'}>Главная</Link>
             <Link to={'/about'}>О магазине</Link>
             beerLogo
-            <a href={'#'}>Вход</a>
+            <a onClick={() => props.setPopup(true)} href={'#'}>Вход</a>
             <a className={s.basket} href={'#'}>
                 <span className={s.spanHelper}>
                     <Basket className={s.basketIcon}/>

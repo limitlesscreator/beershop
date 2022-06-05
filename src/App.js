@@ -9,6 +9,8 @@ function App() {
     const [reloadData, setReloadData] = useState(true)
     const [sizeBasket, setSizeBasket] = useState(0)
     const [costBasket, setConstBasket] = useState(0)
+    const [popup,setPopup] = useState(false)
+    const [userLogged, setUserLogged] = useState(false)
 
     const [valueOfStuff, setValueOfStuff] = useState([])
 
@@ -52,6 +54,9 @@ function App() {
     return (
         <>
             <Main
+                setUserLogged={setUserLogged}
+                setPopup={setPopup}
+                popup={popup}
                 setConstBasket={setConstBasket}
                 setSizeBasket={setSizeBasket}
                 reloadData={reloadData}

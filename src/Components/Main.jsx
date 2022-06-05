@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 import App from "../App";
 import {Notfoundpage} from "./Notfoundpage";
 import {Aboutshop} from "./Aboutshop";
+import {Popup} from "./Popup";
 export const Main = (props) => {
     //current location
     // const location = useLocation()
@@ -14,7 +15,8 @@ export const Main = (props) => {
 
     return (
         <div className={s.main}>
-            <Nav costBasket={props.costBasket} sizeBasket={props.sizeBasket}/>
+            {props.popup ? <Popup setUserLogged={props.setUserLogged} setPopup={props.setPopup}/> : ''}
+            <Nav setPopup={props.setPopup} costBasket={props.costBasket} sizeBasket={props.sizeBasket}/>
             <Routes>
                 <Route path={'/'} element={<ListBeers setConstBasket={props.setConstBasket} setSizeBasket={props.setSizeBasket} setValueOfStuff={props.setValueOfStuff} valueOfStuff={props.valueOfStuff} setReloadData={props.setReloadData}  beerDetails={props.beerDetails} priceOfBeer={props.priceOfBeer} fetchBeers={props.fetchBeers} beers={props.beers}/>}/>
                 <Route path={'beerDetails/:beer'} element={<Beerdetails fetchBeers={props.fetchBeers} setConstBasket={props.setConstBasket} setSizeBasket={props.setSizeBasket}   setValueOfStuff={props.setValueOfStuff} valueOfStuff={props.valueOfStuff} setReloadData={props.setReloadData} priceOfBeer={props.priceOfBeer} reloadData={props.reloadData} beerDetails={props.beerDetails} currentBeer={props.currentBeer}/>}/>

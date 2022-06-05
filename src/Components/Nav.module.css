@@ -36,8 +36,8 @@
 
 .countBasket{
     position: absolute;
-    top: 2px;
-    left: 80px;
+    top: -7px;
+    left: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,3 +59,6 @@
     padding-left: 20px;
 }
 
+.spanHelper{
+    position: relative;
+}

@@ -11,10 +11,11 @@ export const Nav = (props) => {
             beerLogo
             <a href={'#'}>Вход</a>
             <a className={s.basket} href={'#'}>
-                <Basket className={s.basketIcon}/>
-
-                <div className={s.sumBasket}>{props.costBasket} ₽.</div>
+                <span className={s.spanHelper}>
+                    <Basket className={s.basketIcon}/>
                 <div className={s.countBasket}>{props.sizeBasket}</div>
+                </span>
+                <div className={s.sumBasket}>{props.costBasket} ₽.</div>
             </a>
         </div>
     );

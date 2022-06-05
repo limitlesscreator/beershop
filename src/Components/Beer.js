@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import s from './Card.module.css'
 import {Link, useLocation} from 'react-router-dom'
+import {Nav} from "./Nav";
 
 export const Beer = (props) => {
     const [available, setAvailable] = useState(true)
@@ -19,8 +20,7 @@ export const Beer = (props) => {
             <img src={props.beer.image_url} alt={props.beer.name}/>
             <div>
                 <div className={s.priceBeer}>{tempPrice} ₽</div>
-
-                {props.valueOfStuff >= 1 ? <button onClick={addToBasketOne} className={s.busket}>в корзину</button> : <div>Нету в наличии</div>}
+                {props.userLogged ? <div>{props.valueOfStuff >= 1 ? <button onClick={addToBasketOne} className={s.busket}>в корзину</button> : <div>Нету в наличии</div>}</div> : <div>Чтобы добавить товар в корзину залогинтесь</div>}
             </div>
         </div>
     );

@@ -20,7 +20,6 @@ function App() {
 
 
     const fetchBeers = () => {
-        console.log('boom')
         fetch('https://api.punkapi.com/v2/beers?page=1&per_page=12')
             .then(res => res.json())
             .then(data => {
@@ -28,11 +27,9 @@ function App() {
                 if (valueOfStuff.length === 0){
                     let tempOfId = [] // создаётся массив с кол-вом наличия товара
                     data.forEach(el => tempOfId.push({id: el.id, valueOfStuff: +el.name.length % 6 === 0 ? 0 : Number(el.name.length) * 2}))
-                    console.log(tempOfId)
                     setValueOfStuff(tempOfId)
                 }
                 ///////////////////////////////////////////////////////
-
                 setBeers(data)
             })
     }
@@ -54,6 +51,7 @@ function App() {
     return (
         <>
             <Main
+                userLogged={userLogged}
                 setUserLogged={setUserLogged}
                 setPopup={setPopup}
                 popup={popup}

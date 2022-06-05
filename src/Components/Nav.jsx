@@ -9,14 +9,14 @@ export const Nav = (props) => {
             <Link to={'/'}>Главная</Link>
             <Link to={'/about'}>О магазине</Link>
             beerLogo
-            <a onClick={() => props.setPopup(true)} href={'#'}>Вход</a>
-            <a className={s.basket} href={'#'}>
+            {props.userLogged ?<a onClick={() => props.setUserLogged(false)} href={'#'}>Выход</a> : <a onClick={() => props.setPopup(true)} href={'#'}>Вход</a> }
+            {props.userLogged ?   <a className={s.basket} href={'#'}>
                 <span className={s.spanHelper}>
                     <Basket className={s.basketIcon}/>
                 <div className={s.countBasket}>{props.sizeBasket}</div>
                 </span>
                 <div className={s.sumBasket}>{props.costBasket} ₽.</div>
-            </a>
+            </a> : ''}
         </div>
     );
 };

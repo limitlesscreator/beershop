@@ -10,7 +10,7 @@ function App() {
     const [sizeBasket, setSizeBasket] = useState(0)
     const [costBasket, setConstBasket] = useState(0)
     const [popup,setPopup] = useState(false)
-    const [userLogged, setUserLogged] = useState(false)
+    const [userLogged, setUserLogged] = useState(true)
 
     const [valueOfStuff, setValueOfStuff] = useState([])
 

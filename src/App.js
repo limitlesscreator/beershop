@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useState} from "react";
 import {Main} from "./Components/Main";
+import {Modalerror} from "./Components/Modalerror";
 
 function App() {
     const [beers, setBeers] = useState([])
@@ -12,6 +13,7 @@ function App() {
     const [popup, setPopup] = useState(false)
     const [userLogged, setUserLogged] = useState(true)
     const [longFetchingError, setLongFetchingError] = useState(false)
+    const [fetchingBeersError, setFetchingBeersError] = useState(false)
     const [valueOfStuff, setValueOfStuff] = useState([])
 
 
@@ -19,11 +21,19 @@ function App() {
 
 
     // Запрос на 12 объевтов
-    const fetchBeers = () => {
-        fetch('https://api.punkapi.com/v2/beers?page=1&per_page=12')
-            .then(res => res.json())
+    const fetchBeers = (placeFetching) => {
+        const error = Math.round(Math.random() * (3 - 1) + 1) === 3 // шансы 1 к 3, что нам придёт ошибка с сервера) запрос на не существующий Url
+        let temp = placeFetching === 'ListBeers' ?
+            fetch(`https://api.punka${error ? 'error' : ''}pi.com/v2/beers?page=1&per_page=12`) :  // ошибка запроса сделал только на главном экране
+            fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=12`)
+
+        if (error) {
+            setLongFetchingError(true)
+            setFetchingBeersError(true)
+        }
+
+        temp.then(res => res.json())
             .then(data => {
-                ////////////////////////////////////////////////////////
                 if (valueOfStuff.length === 0) {
                     let tempOfId = [] // создаётся массив с кол-вом наличия товара
                     data.forEach(el => tempOfId.push({
@@ -32,7 +42,6 @@ function App() {
                     }))
                     setValueOfStuff(tempOfId)
                 }
-                ///////////////////////////////////////////////////////
                 setBeers(data)
             })
     }
@@ -78,11 +87,16 @@ function App() {
     useEffect(() => {
         setTimeout(() => {
             setLongFetchingError(false)
-        },15000)
-    },[longFetchingError])
+            setFetchingBeersError(false)
+        }, 15000)
+    }, [longFetchingError, fetchingBeersError])
 
     return (
         <>
+            {longFetchingError || fetchingBeersError ? <Modalerror
+                setLongFetchingError={setLongFetchingError}
+                setFetchingBeersError={setFetchingBeersError}
+                text={`${longFetchingError && !fetchingBeersError ? 'Медленный интернет :(' : 'Данные не пришли'} `}/> : ''}
             <Main
                 setLongFetchingError={setLongFetchingError}
                 longFetchingError={longFetchingError}

@@ -14,7 +14,7 @@ export const Beerdetails = (props) => {
             props.setReloadData(false)
             props.beerDetails(tempId)
             if (props.valueOfStuff.length === 0) { // если данные о наличии пустые, создать заного
-                props.fetchBeers()
+               props.fetchBeers(null) //  добавить доп пропс, который говорит, что мы делаем запрос на главной или в beerdatail, если на главной то шанс на неудачу 1 к 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             }
         }
     }, [])
@@ -40,7 +40,7 @@ export const Beerdetails = (props) => {
                         props.setSizeBasket((prev) => prev + +addToBasket)
                         props.setConstBasket((prev) => prev + (props.priceOfBeer(props.currentBeer.abv) * addToBasket))
                         setErrorCount(false)
-                        setAddToBasket(props.valueOfStuff[location.pathname.split('-').reverse()[0]].valueOfStuff)
+                        setAddToBasket(props.valueOfStuff[tempId].valueOfStuff)
                     }}
                     className={s.busket}>Добавить в корзину
                 </button>
@@ -48,21 +48,20 @@ export const Beerdetails = (props) => {
                 <input value={addToBasket} type="number" min={1} max={props.valueOfStuff[tempId]?.valueOfStuff}
                        onChange={(e) => {
                            let temp = e.currentTarget.value
-                           if (temp > (props.valueOfStuff[tempId].valueOfStuff)){
+                           if (temp > (props.valueOfStuff[tempId].valueOfStuff)) {
                                setErrorCount(true)
                                return
-                           }
-                           else {
+                           } else {
                                setErrorCount(false)
                                setAddToBasket(temp)
                            }
                        }}
 
                 /> </> : <div>Нету в наличии</div>}</div> : <div>Чтобы добавить товар в корзину залогинтесь</div>}
-            { errorCount ? <div>Не хитри, в наличии
+            {errorCount ? <div>Не хитри, в наличии
                 только {props.valueOfStuff[tempId].valueOfStuff} :)</div> : ''}
 
-            {props.longFetchingError ? <Modalerror setLongFetchingError={props.setLongFetchingError} text={'Медленный интернет, подождите'}/> : ''}
+
         </div>
     );
 };

@@ -5,7 +5,8 @@ import {Nav} from "./Nav";
 
 export const ListBeers = (props) => {
     useEffect(() => {
-        props.fetchBeers()
+        console.log('bam')
+        props.fetchBeers('ListBeers')
     }, [])
 
     return (

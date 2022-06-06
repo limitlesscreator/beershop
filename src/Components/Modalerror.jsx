@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Modalerror.module.css'
+import {ReactComponent as Closeicon} from "../icons/close.svg";
 export const Modalerror = (props) => {
 
     const clickHandler = () => {
@@ -9,7 +10,7 @@ export const Modalerror = (props) => {
 
     return (
         <div className={s.modal}>
-            <div onClick={clickHandler}>Закрыть</div>
+            <Closeicon onClick={clickHandler} className={s.closeIcon}/>
             {props.text}
         </div>
     );

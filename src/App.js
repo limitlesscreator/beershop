@@ -22,10 +22,16 @@ function App() {
 
     // Запрос на 12 объевтов
     const fetchBeers = (placeFetching) => {
-        const error = Math.round(Math.random() * (3 - 1) + 1) === 3 // шансы 1 к 3, что нам придёт ошибка с сервера) запрос на не существующий Url
+        let error
+        if(placeFetching === 'ListBeers'){
+            error =  Math.round(Math.random() * (3 - 1) + 1) === 3// шансы 1 к 3, что нам придёт ошибка с сервера) запрос на не существующий Url
+        }
+        else {
+            error = false
+        }
+
         let temp = placeFetching === 'ListBeers' ?
-            fetch(`https://api.punka${error ? 'error' : ''}pi.com/v2/beers?page=1&per_page=12`) :  // ошибка запроса сделал только на главном экране
-            fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=12`)
+            fetch(`https://api.punka${error ? 'error' : ''}pi.com/v2/beers?page=1&per_page=12`) : fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=12`)
 
         if (error) {
             setLongFetchingError(true)
@@ -96,7 +102,7 @@ function App() {
             {longFetchingError || fetchingBeersError ? <Modalerror
                 setLongFetchingError={setLongFetchingError}
                 setFetchingBeersError={setFetchingBeersError}
-                text={`${longFetchingError && !fetchingBeersError ? 'Медленный интернет :(' : 'Данные не пришли'} `}/> : ''}
+                text={`${longFetchingError && !fetchingBeersError ? 'Медленный интернет :(' : 'Данные не пришли :('} `}/> : ''}
             <Main
                 setLongFetchingError={setLongFetchingError}
                 longFetchingError={longFetchingError}

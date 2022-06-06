@@ -1,16 +1,23 @@
 import React, {useEffect} from 'react';
 import {Beer} from "./Beer";
-import s from './Cards.module.css'
+import s from './ListBeers.module.css'
 import {Nav} from "./Nav";
+import open from '../Img/open.png'
+import coldBeer from '../Img/coldBeer.png'
 
 export const ListBeers = (props) => {
+
     useEffect(() => {
-        console.log('bam')
-        props.fetchBeers('ListBeers')
+        if (props.beers.length === 0) {    // у меня делался повторный запрос, когда я с 'О магазине' переходил на главную, если такое решение плохое, дай знать пожалуйста)
+            props.fetchBeers('ListBeers')
+        }
     }, [])
 
     return (
         <div className={s.cards}>
+            <img className={s.open} src={open} alt="openSign"/>
+            <img className={s.coldBeer} src={coldBeer} alt="coldBeer"/>
+
             {props.beers.map((el, index) => {
                 return (
                     <Beer

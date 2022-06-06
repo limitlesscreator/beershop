@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+
+.currentBeerSecond{
+    z-index: 2;
+    position: absolute;
+    top: 45px;
+    left: -15px;
+    width: 150px;
+    mix-blend-mode: color-burn;
+}
+
+.currentBeer{
+    z-index: 3;
+    position: absolute;
+    top: 30px;
+    left: -30px;
+    width: 150px;
+}
+
+.littleBeer{
+    top: 130px;
+    left: -30px;
+    position: absolute;
+    width: 150px;
+}
+
+.main{
+    margin-top: 50px;
+    display: flex;
+    color: white;
+    height: 800px;
+}
+
+.firstPart{
+    position: relative;
+    width: 300px;
+}
+
+.secondPart{
+    position: relative;
+    padding-top: 200px;
+}
+
+.beerName{
+    width: 700px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    color: #fff;
+    text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 21px #fff,
+            0 0 42px #5271ff,
+            0 0 82px #5271ff,
+            0 0 92px #5271ff,
+            0 0 102px #5271ff,
+            0 0 151px #5271ff;
+    font-family: "Yellowtail", sans-serif;
+    text-align: center;
+    font-weight: 400;
+    font-size: 5.2rem;
+}

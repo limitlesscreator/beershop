@@ -10,10 +10,6 @@ import {Aboutshop} from "./Aboutshop";
 import {Popup} from "./Popup";
 
 export const Main = (props) => {
-    //current location
-    // const location = useLocation()
-    // console.log(location.pathname)
-
     return (
         <div className={s.main}>
             {props.popup ?

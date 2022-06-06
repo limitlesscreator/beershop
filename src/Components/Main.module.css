@@ -1,7 +1,7 @@
 .main{
     width: 1060px;
+    height: 100%;
     margin: 0 auto;
-    background: rgba(255, 230, 0, 0.45);
 }
 
 h1 {

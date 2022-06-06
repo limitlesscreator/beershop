@@ -1,10 +1,15 @@
 import React from 'react';
+import s from './Notfoundpage.module.css'
 
 export const Notfoundpage = () => {
     return (
-        <div>
-            404 <br/>
-            Что-то пошло не так. Данной страницы не существует:)
+        <div className={s.container}>
+            <h3 className={s.neonText}>
+                404
+            </h3>
+            <h2 className={s.neonText}>
+                Что-то пошло не так <br/> <br/>
+                Данной страницы не существует</h2>
         </div>
     );
 };

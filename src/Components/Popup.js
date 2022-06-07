@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from '../Components/Popup.module.css'
 import {ReactComponent as Closeicon} from "../icons/close.svg";
+import {Context} from "../context";
 
-export const Popup = (props) => {
-    const [userLogin, setUserLogin] = useState('')
-    const [userPassword, setUserPassword] = useState('')
-    const [errorLogged, setErrorLogged] = useState(false)
+export const Popup = () => {
+    const {userLogin,setUserLogin,userPassword,setUserPassword,errorLogged,setErrorLogged,setPopup,setUserLogged,beers} = useContext(Context)
+
     const loggedUser = () => {
         let ifUserReal = false
 
-        for (let i = 0; i < props.beers.length; i++) {
-            if (String(props.beers[i]['name']) === userLogin && String(props.beers[i]['target_fg']) === userPassword) {
+        for (let i = 0; i < beers.length; i++) {
+            if (String(beers[i]['name']) === userLogin && String(beers[i]['target_fg']) === userPassword) {
                 ifUserReal = true
                 break
             }
@@ -18,8 +18,8 @@ export const Popup = (props) => {
         // name: login
         // target_fg:  пароль
         if (ifUserReal) {
-            props.setUserLogged(true)
-            props.setPopup(false)
+            setUserLogged(true)
+            setPopup(false)
             console.log('user logged')
         } else {
             setErrorLogged(true)
@@ -36,7 +36,7 @@ export const Popup = (props) => {
     return (
         <div className={s.main}>
             <div className={s.square}>
-                <Closeicon onClick={() => props.setPopup(false)} className={s.closeIcon}/>
+                <Closeicon onClick={() => setPopup(false)} className={s.closeIcon}/>
 
                 <div className={s.inputContainer}>
                     <input type="text" placeholder={'login'} onKeyPress={handleKeypress} onChange={(e) => {
@@ -51,7 +51,7 @@ export const Popup = (props) => {
 
                 <div className={s.buttonContainer}>
                     <button onClick={loggedUser}>Войти</button>
-                    <button onClick={() => props.setPopup(false)}>Отмена</button>
+                    <button onClick={() => setPopup(false)}>Отмена</button>
                 </div>
 
                 {errorLogged ? <div className={s.wrongPasswork}>Неверный пароль или логин</div> : ''}

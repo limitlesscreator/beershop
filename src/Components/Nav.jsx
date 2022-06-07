@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import s from './Nav.module.css'
 import {Link} from 'react-router-dom'
 import {ReactComponent as Basket} from '../icons/basket.svg'
 import logo from '../Img/logoBeer.png'
+import {Context} from "../context";
 
-export const Nav = (props) => {
+export const Nav = () => {
+    const {setUserLogged,userLogged,setPopup,costBasket,sizeBasket} = useContext(Context)
+
     const specialClass = s.basket + ' ' + s.hoverElement
     return (
         <div className={s.nav}>
@@ -16,16 +19,16 @@ export const Nav = (props) => {
             <div className={s.positionLogo}>
                 <img className={s.logo} src={logo} alt=""/>
             </div>
-            {props.userLogged ?<a onClick={() => props.setUserLogged(false)} href={'#'}>Выход</a> : <a onClick={() => props.setPopup(true)} href={'#'}>Вход</a> }
+            {userLogged ?<a onClick={() => setUserLogged(false)} href={'#'}>Выход</a> : <a onClick={() => setPopup(true)} href={'#'}>Вход</a> }
 
 
             <span className={specialClass}>
-                {props.userLogged ?   <a className={s.basket} href={'#'}>
+                {userLogged ?   <a className={s.basket} href={'#'}>
                 <span className={s.spanHelper}>
                         <Basket className={s.basketIcon}/>
-                <div className={s.countBasket}>{props.sizeBasket}</div>
+                <div className={s.countBasket}>{sizeBasket}</div>
                 </span>
-                    <div className={s.sumBasket}>{props.costBasket} ₽.</div>
+                    <div className={s.sumBasket}>{costBasket} ₽.</div>
                 </a> : ''}
             </span>
 

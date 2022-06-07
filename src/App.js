@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useState} from "react";
 import {Main} from "./Components/Main";
 import {Modalerror} from "./Components/Modalerror";
+import {Context} from './context'
 
 function App() {
     const [beers, setBeers] = useState([])
@@ -11,22 +11,23 @@ function App() {
     const [sizeBasket, setSizeBasket] = useState(0)
     const [costBasket, setConstBasket] = useState(0)
     const [popup, setPopup] = useState(false)
-    const [userLogged, setUserLogged] = useState(true)
+    const [userLogged, setUserLogged] = useState(false)
     const [longFetchingError, setLongFetchingError] = useState(false)
     const [fetchingBeersError, setFetchingBeersError] = useState(false)
     const [valueOfStuff, setValueOfStuff] = useState([])
-
-
-    // const [bestBeer, setBestBeer] = useState('Godzila') в будущем хочу добавить popup или что-то вроде такого,  'пиво дня'))0
-
+    const [addToBasket, setAddToBasket] = useState(1)
+    const [errorCount, setErrorCount] = useState(false)
+    const [heightPicture, setHeightPicture] = useState(0)
+    const [userLogin, setUserLogin] = useState('')
+    const [userPassword, setUserPassword] = useState('')
+    const [errorLogged, setErrorLogged] = useState(false)
 
     // Запрос на 12 объевтов
     const fetchBeers = (placeFetching) => {
         let error
-        if(placeFetching === 'ListBeers'){
-            error =  Math.round(Math.random() * (3 - 1) + 1) === 3// шансы 1 к 3, что нам придёт ошибка с сервера) запрос на не существующий Url
-        }
-        else {
+        if (placeFetching === 'ListBeers') {
+            error = Math.round(Math.random() * (3 - 1) + 1) === 3// шансы 1 к 3, что нам придёт ошибка с сервера) запрос на не существующий Url
+        } else {
             error = false
         }
 
@@ -98,33 +99,50 @@ function App() {
     }, [longFetchingError, fetchingBeersError])
 
     return (
-        <>
-            {longFetchingError || fetchingBeersError ? <Modalerror
-                setLongFetchingError={setLongFetchingError}
-                setFetchingBeersError={setFetchingBeersError}
-                text={`${longFetchingError && !fetchingBeersError ? 'Медленный интернет :(' : 'Данные не пришли :('} `}/> : ''}
-            <Main
-                setLongFetchingError={setLongFetchingError}
-                longFetchingError={longFetchingError}
-                userLogged={userLogged}
-                setUserLogged={setUserLogged}
-                setPopup={setPopup}
-                popup={popup}
-                setConstBasket={setConstBasket}
-                setSizeBasket={setSizeBasket}
-                reloadData={reloadData}
-                setReloadData={setReloadData}
-                currentBeer={currentBeer}
-                beerDetails={beerDetails}
-                priceOfBeer={priceOfBeer}
-                beers={beers}
-                fetchBeers={fetchBeers}
-                sizeBasket={sizeBasket}
-                costBasket={costBasket}
-                valueOfStuff={valueOfStuff}
-                setValueOfStuff={setValueOfStuff}
-            />
-        </>
+        // Babylon tower :D
+        <Context.Provider value={{
+            beers,
+            popup,
+            setPopup,
+            userLogin,
+            reloadData,
+            sizeBasket,
+            costBasket,
+            errorCount,
+            userLogged,
+            fetchBeers,
+            beerDetails,
+            currentBeer,
+            priceOfBeer,
+            addToBasket,
+            errorLogged,
+            setUserLogin,
+            userPassword,
+            valueOfStuff,
+            setReloadData,
+            setUserLogged,
+            setErrorCount,
+            heightPicture,
+            setSizeBasket,
+            setAddToBasket,
+            setErrorLogged,
+            setConstBasket,
+            setUserPassword,
+            setValueOfStuff,
+            setHeightPicture,
+            longFetchingError,
+            setLongFetchingError,
+            setFetchingBeersError,
+        }}>
+            <>
+                {longFetchingError || fetchingBeersError ?
+                    <Modalerror
+                        text={`${longFetchingError && !fetchingBeersError ? 'Медленный интернет :(' : 'Данные не пришли :('} `}/> : ''}
+                <Main
+
+                />
+            </>
+        </Context.Provider>
     );
 }
 

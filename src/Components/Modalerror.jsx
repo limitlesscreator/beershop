@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import s from './Modalerror.module.css'
 import {ReactComponent as Closeicon} from "../icons/close.svg";
+import {Context} from '../context'
+
+
 export const Modalerror = (props) => {
+    const {setLongFetchingError,setFetchingBeersError} = useContext(Context)
 
     const clickHandler = () => {
-        props.setLongFetchingError(false)
-        props.setFetchingBeersError(false)
+        setLongFetchingError(false)
+        setFetchingBeersError(false)
     }
 
     return (

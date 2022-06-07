@@ -1,15 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Beer} from "./Beer";
 import s from './ListBeers.module.css'
-import {Nav} from "./Nav";
 import open from '../Img/open.png'
 import coldBeer from '../Img/coldBeer.png'
+import {Context} from "../context";
 
-export const ListBeers = (props) => {
+export const ListBeers = () => {
+    const {
+        valueOfStuff,
+        fetchBeers,
+        beers,
+    } = useContext(Context)
+
 
     useEffect(() => {
-        if (props.beers.length === 0) {    // у меня делался повторный запрос, когда я с 'О магазине' переходил на главную, если такое решение плохое, дай знать пожалуйста)
-            props.fetchBeers('ListBeers')
+        if (beers.length === 0) {    // у меня делался повторный запрос, когда я с 'О магазине' переходил на главную, если такое решение плохое, дай знать пожалуйста)
+            fetchBeers('ListBeers')
         }
     }, [])
 
@@ -18,22 +24,14 @@ export const ListBeers = (props) => {
             <img className={s.open} src={open} alt="openSign"/>
             <img className={s.coldBeer} src={coldBeer} alt="coldBeer"/>
 
-            {props.beers.map((el, index) => {
+            {beers.map(el => {
                 return (
                     <Beer
-                        userLogged={props.userLogged}
-                        setConstBasket={props.setConstBasket}
-                        setSizeBasket={props.setSizeBasket}
-                        setValueOfStuff={props.setValueOfStuff}
-                        valueOfStuff={props.valueOfStuff[el.id]?.valueOfStuff}
-                        allValueOfStuffs={props.valueOfStuff}
-                        reloadData={props.reloadData}
-                        setReloadData={props.setReloadData}
+                        valueOfStuff={valueOfStuff[el.id]?.valueOfStuff}
                         id={el.id}
-                        beerDetails={props.beerDetails}
-                        priceOfBeer={props.priceOfBeer}
                         key={el.id}
-                        beer={el}/>
+                        beer={el}
+                    />
                 )
             })}
         </div>

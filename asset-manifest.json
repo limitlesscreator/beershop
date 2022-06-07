@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/beershop/static/css/main.7afe8ea2.css",
-    "main.js": "/beershop/static/js/main.c73ed5d3.js",
+    "main.js": "/beershop/static/js/main.ef852ec4.js",
     "static/js/787.c4325fb5.chunk.js": "/beershop/static/js/787.c4325fb5.chunk.js",
     "static/media/open.png": "/beershop/static/media/open.cee80f816709d4319cf3.png",
     "static/media/priceForBeer.png": "/beershop/static/media/priceForBeer.7b590a69df94f1f87664.png",
@@ -11,11 +11,11 @@
     "static/media/close.svg": "/beershop/static/media/close.0688fdb1788e7141f5a765ca3f7b8e60.svg",
     "index.html": "/beershop/index.html",
     "main.7afe8ea2.css.map": "/beershop/static/css/main.7afe8ea2.css.map",
-    "main.c73ed5d3.js.map": "/beershop/static/js/main.c73ed5d3.js.map",
+    "main.ef852ec4.js.map": "/beershop/static/js/main.ef852ec4.js.map",
     "787.c4325fb5.chunk.js.map": "/beershop/static/js/787.c4325fb5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7afe8ea2.css",
-    "static/js/main.c73ed5d3.js"
+    "static/js/main.ef852ec4.js"
   ]
 }
